@@ -13,7 +13,7 @@ struct ContentView: View {
             CardView(content: "✈️")
             CardView(content: "🚀")
             CardView(content: "🚁")
-            CardView(content: "🚂")
+            CardView(content: "🚂 ")
         }
         .padding(.horizontal)
     }
