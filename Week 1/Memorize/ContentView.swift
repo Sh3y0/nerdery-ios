@@ -10,11 +10,11 @@ import SwiftUI
 struct ContentView: View {
     var emojis:[String] = ["🚲", "🚂", "🚁", "🚜", "🏎", "🚑", "🚓", "🚒", "🛴", "🚎", "🛻", "🚤", "⛵️", "🦽", "🛸", "🚃", "🛶", "🚛", "🛺", "🦼", "🛩", "🚕", "🚢", "🚡"]
     
-    @State var emojisCount = 4
+    @State var emojisCount = 20
     var body: some View {
         VStack {
             ScrollView {
-                LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]) {
                     ForEach(emojis[0..<emojisCount], id: \.self, content: {emoji in
                         CardView(content: emoji).aspectRatio(2/3, contentMode: .fit)
                     })
@@ -65,7 +65,7 @@ struct CardView: View {
                     .fill()
                     .foregroundColor(.white)
                 shape
-                    .stroke(lineWidth: 3)
+                    .strokeBorder(lineWidth: 3)
                     .foregroundColor(.red)
                 Text(content)
                     .font(.largeTitle)
@@ -83,7 +83,7 @@ struct CardView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().preferredColorScheme(.dark)
+        ContentView().preferredColorScheme(.dark).previewInterfaceOrientation(.portrait)
         ContentView().preferredColorScheme(.light)
     }
 }
