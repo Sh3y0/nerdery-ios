@@ -19,29 +19,38 @@ struct ContentView: View {
                 })
             }
             HStack{
-                Button(action: {
-                    emojisCount += 1
-                }, label: {
-                    VStack {
-                        Text("Add")
-                        Text("Card")
-                    }
-                })
+                remove
                 Spacer()
-                Button(action: {
-                    emojisCount -= 1
-                }, label: {
-                    VStack{
-                        Text("Remove")
-                        Text("Card")
-                    }
-                })
+                add
             }
             .padding(.horizontal)
         }
         .padding(.horizontal)
     }
+    
+    var remove: some View {
+        Button(action: {
+            emojisCount += 1
+        }, label: {
+            VStack {
+                Text("Add")
+                Text("Card")
+            }
+        })
+    }
+    
+    var add: some View {
+        Button(action: {
+            emojisCount -= 1
+        }, label: {
+            VStack{
+                Text("Remove")
+                Text("Card")
+            }
+        })
+    }
 }
+
 struct CardView: View {
     var content: String
     @State var isFaceUp: Bool = false
