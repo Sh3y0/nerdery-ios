@@ -375,8 +375,33 @@ enum Suit {
             return "clubs"
         }
     }
+    
+    func Color() -> String {
+        switch self {
+        case .spades:
+            return "back"
+        case .clubs:
+            return "back"
+        case .hearts:
+            return "red"
+        case .diamonds:
+            return "red"
+        }
+    }
 }
 
-let heart = Suit.spades
+let heart = Suit.hearts
 
 let heartDescription = heart.simpleDescription()
+let heartColor = heart.Color()
+
+
+struct Card {
+    var rank: Rank
+    var suit: Suit
+    func simpleDescription() -> String {
+        return "The \(rank.simpleDescription()) of \(suit.simpleDescription())"
+    }
+}
+let threeOfSpades = Card(rank: .three, suit: .spades)
+let threeOfSpadesDescription = threeOfSpades.simpleDescription()
