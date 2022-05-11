@@ -356,7 +356,7 @@ let ace = Rank.ace
 let aceRawValue = ace.rawValue
 
 if let convertedRank = Rank(rawValue: 3) {
-    let threeDescription = convertedRank.simpleDescription()
+    _ = convertedRank.simpleDescription()
 }
 
 
@@ -395,6 +395,21 @@ let heart = Suit.hearts
 let heartDescription = heart.simpleDescription()
 let heartColor = heart.Color()
 
+enum ServerResponse {
+    case result(String, String)
+    case failure(String)
+}
+
+let success = ServerResponse.result("6:00 am", "8:09 pm")
+let  failure = ServerResponse.failure("out of cheese.")
+
+switch success {
+case let .result(sunrise, sunset):
+    print("Sunrise is at \(sunrise) and sunset is at \(sunset).")
+case let .failure(message):
+    print("Failure...  \(message)")
+}
+// Prints "Sunrise is at 6:00 am and sunset is at 8:09 pm."
 
 struct Card {
     var rank: Rank
@@ -439,6 +454,26 @@ struct SimpleStructure: ExampleProtocol{
 
 var b = SimpleStructure()
 b.adjust()
-let bDescriptino = b.simpleDescription
+let bDescription = b.simpleDescription
+
+extension Int: ExampleProtocol {
+    var simpleDescription: String {
+        return "The number \(self)"
+    }
+    mutating func adjust() {
+        self += 42
+    }
+}
+
+print(7.simpleDescription)
+
+let protocolValue: ExampleProtocol = a
+print(protocolValue.simpleDescription)
+
+
+
+
+
+
 
 
