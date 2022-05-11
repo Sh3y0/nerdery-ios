@@ -477,3 +477,87 @@ print(protocolValue.simpleDescription)
 
 
 
+enum PrinterError: Error {
+    case outOfPaper
+    case noToner
+    case onFire
+}
+
+
+func send(job: Int, toPrinter printerName: String) throws -> String {
+    if  printerName == "Never Has Toner" {
+        throw PrinterError.noToner
+    }
+    return "Job Sent"
+}
+
+do {
+    let printerResponse = try send(job: 1040, toPrinter: "Never Has Toner")
+    print(printerResponse)
+} catch {
+    print(error)
+}
+
+
+
+//handle error is to use try? to convert result to an optional
+
+let printerSuccess = try? send(job: 1884, toPrinter: "Mergenthaler")
+let printerFailure = try? send(job: 1885, toPrinter: "Never Has Toner")
+
+
+var fridgeIsOpen = false
+let fridgeContent = ["milkl", "eggs", "lefttovers"]
+
+func fridgeContains(_ food: String) -> Bool {
+    fridgeIsOpen = true
+    
+    defer {
+        fridgeIsOpen = false
+    }
+    
+    let result = fridgeContent.contains(food)
+    return result
+}
+
+fridgeContains("banana")
+print(fridgeIsOpen)
+
+
+
+//GENERIC
+func makeArray<Item>(repeating  item: Item, numberOfTimes: Int) -> [Item] {
+    var result: [Item] = []
+    for _ in 0..<numberOfTimes {
+        result.append(item)
+    }
+    
+    return result
+}
+
+makeArray(repeating: "Knock", numberOfTimes: 4)
+
+
+// Reimplement the Swift standard library's optional type
+enum OptionalValue<Wrapped> {
+    case none
+    case some(Wrapped)
+}
+var possibleInteger: OptionalValue<Int> = .none
+possibleInteger = .some(100)
+
+
+func anyCommonElements<T: Sequence, U: Sequence>(_ lhs: T, _ rhs: U) -> Bool
+    where T.Element: Equatable, T.Element == U.Element
+{
+    for lhsItem in lhs {
+        for rhsItem in rhs {
+            if lhsItem == rhsItem {
+                return true
+            }
+        }
+    }
+    return false
+}
+anyCommonElements([1, 2, 3], [3])
+
