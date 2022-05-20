@@ -11,7 +11,7 @@ struct MemoryGame<CardContent> {
     private(set) var cards: Array<Card>
     
     func choose(_ card: Card) {
-        
+        print("Hello choose card")
     }
     
     init(numberOfPairsdOfCards: Int, createCardContent: (Int) -> CardContent) {
@@ -19,16 +19,16 @@ struct MemoryGame<CardContent> {
         //Add Add AddNumberOfPairsOfCards * 2 cards to card
         for pairIndex in 0..<numberOfPairsdOfCards {
             let content = createCardContent(pairIndex)
-            cards.append(Card(content: content))
-            cards.append(Card(content: content))
+            cards.append(Card(content: content, id: pairIndex*2))
+            cards.append(Card(content: content, id: pairIndex*2+1))
         }
     }
     
     struct Card: Identifiable {
-        var id: ObjectIdentifier
-        
-        var isFaceUp: Bool = false
+        var isFaceUp: Bool = true
         var isMatched: Bool = false
         var content:  CardContent
+        
+        var id: Int
     }
 }
