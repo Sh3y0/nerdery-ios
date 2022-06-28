@@ -60,7 +60,7 @@ struct CardView: View {
                     shape
                         .strokeBorder(lineWidth: DrawingConstants.lineWidth)
                         .foregroundColor(.red)
-                    Circle().foregroundColor(.red).padding(6).opacity(0.5)
+                    Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 110-90)).foregroundColor(.red).padding(6).opacity(0.5)
                     Text(card.content)
                         .font(font(in: geometry.size))
                 } else if card.isMatched{
